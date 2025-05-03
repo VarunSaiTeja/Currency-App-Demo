@@ -1,3 +1,4 @@
+using CurrencyAPI.Extensions;
 using CurrencyAPI.Providers;
 using CurrencyAPI.Providers.Frankfurter;
 using FluentValidation;
@@ -14,7 +15,9 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services
     .AddRefitClient<IFrankfurterApi>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev/v1"));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev/v1"))
+    .AddPolicyHandler(PollyExtensions.GetRetryPolicy())
+    .AddPolicyHandler(PollyExtensions.GetCircuitBreakerPolicy());
 
 builder.Services.AddKeyedScoped<ICurrencyProvider, FrankfurterProvider>(CurrencyProviderType.Frankfurter);
 builder.Services.AddScoped<CurrencyProviderFactory>();
