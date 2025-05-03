@@ -1,6 +1,4 @@
-﻿using CurrencyAPI.Providers.Frankfurter;
-
-namespace CurrencyAPI.Providers;
+﻿namespace CurrencyAPI.Providers;
 
 public enum CurrencyProviderType
 {
@@ -12,11 +10,7 @@ public class CurrencyProviderFactory(IServiceProvider services)
 {
     public virtual ICurrencyProvider Get(CurrencyProviderType providerType = CurrencyProviderType.Frankfurter)
     {
-        return providerType switch
-        {
-            CurrencyProviderType.Frankfurter => services.GetService<FrankfurterProvider>(),
-            CurrencyProviderType.OpenExchangeRates => throw new NotImplementedException(),
-            _ => throw new NotImplementedException(),
-        };
+        return services.GetKeyedService<ICurrencyProvider>(providerType)
+            ?? throw new ArgumentException($"No provider found for type {providerType}");
     }
 }

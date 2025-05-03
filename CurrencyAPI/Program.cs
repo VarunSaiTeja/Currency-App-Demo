@@ -16,7 +16,7 @@ builder.Services
     .AddRefitClient<IFrankfurterApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev/v1"));
 
-builder.Services.AddScoped<FrankfurterProvider>();
+builder.Services.AddKeyedScoped<ICurrencyProvider, FrankfurterProvider>(CurrencyProviderType.Frankfurter);
 builder.Services.AddScoped<CurrencyProviderFactory>();
 
 var app = builder.Build();
