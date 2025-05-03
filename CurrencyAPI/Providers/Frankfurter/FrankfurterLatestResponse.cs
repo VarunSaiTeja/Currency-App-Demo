@@ -22,21 +22,6 @@ public class FrankfurterLatestResponse
             })]
         };
     }
-
-    public static implicit operator ConversionResponse(FrankfurterLatestResponse response)
-    {
-        return new ConversionResponse
-        {
-            Base = response.Base,
-            Amount = response.Amount,
-            ConversionRates = [.. response.Rates.Select(rate => new ConversionRateInfo
-            {
-                Currency = rate.Key,
-                Rate = rate.Value,
-                Amount = response.Amount * rate.Value
-            })]
-        };
-    }
 }
 
 public class FrankfurterHistoricResponse

@@ -5,14 +5,25 @@ namespace CurrencyAPI.Providers.Frankfurter;
 
 public class FrankfurterProvider(IFrankfurterApi api) : ICurrencyProvider
 {
-    public async Task<ConversionResponse> Conversion(ConversionRequest request)
-    {
-        return await api.GetExchangeRatesAsync(request.Base, [.. request.Symbols]);
-    }
-
     public async Task<ExchangeRatesResponse> ExchangeRates(ExchangeRatesRequest request)
     {
         return await api.GetExchangeRatesAsync(request.Base);
+    }
+
+    public async Task<ConversionResponse> Conversion(ConversionRequest request)
+    {
+        var frankResp = await api.GetExchangeRatesAsync(request.Base, [.. request.Symbols]);
+        return new ConversionResponse
+        {
+            Base = frankResp.Base,
+            Amount = request.Amount,
+            ConversionRates = [.. frankResp.Rates.Select(rate => new ConversionRateInfo
+            {
+                Currency = rate.Key,
+                Amount = Math.Round(rate.Value * request.Amount, 2),
+                ConversionRate = rate.Value
+            })]
+        };
     }
 
     public async Task<HistoricRatesResponse> HistoricRates([FromQuery] HistoricRatesRequest request)
