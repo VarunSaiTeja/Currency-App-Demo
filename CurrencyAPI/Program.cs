@@ -1,5 +1,8 @@
+using CurrencyAPI.Providers;
+using CurrencyAPI.Providers.Frankfurter;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
+builder.Services
+    .AddRefitClient<IFrankfurterApi>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev/v1"));
+
+builder.Services.AddScoped<FrankfurterProvider>();
+builder.Services.AddScoped<CurrencyProviderFactory>();
 
 var app = builder.Build();
 
