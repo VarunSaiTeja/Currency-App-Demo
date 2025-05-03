@@ -31,7 +31,7 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerVersioning();
-builder.Services.AddDistributedMemoryCache();
+builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);

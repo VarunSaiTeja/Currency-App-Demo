@@ -1,9 +1,10 @@
 ﻿using CurrencyAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CurrencyAPI.Providers.Frankfurter;
 
-public class FrankfurterProvider(IFrankfurterApi api) : ICurrencyProvider
+public class FrankfurterProvider(IFrankfurterApi api, IMemoryCache cache) : ICurrencyProvider
 {
     public async Task<ExchangeRatesResponse> ExchangeRates(ExchangeRatesRequest request)
     {
@@ -12,7 +13,17 @@ public class FrankfurterProvider(IFrankfurterApi api) : ICurrencyProvider
 
     public async Task<ConversionResponse> Conversion(ConversionRequest request)
     {
-        var frankResp = await api.GetExchangeRatesAsync(request.Base, request.Symbols);
+        var cacheKey = $"Conversion_{request.Base}_{string.Join(",", request.Symbols)}";
+        if (!cache.TryGetValue(cacheKey, out FrankfurterLatestResponse frankResp))
+        {
+            frankResp = await api.GetExchangeRatesAsync(request.Base, request.Symbols);
+            var cacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+            };
+            cache.Set(cacheKey, frankResp, cacheEntryOptions);
+        }
+
         return new ConversionResponse
         {
             Base = frankResp.Base,
@@ -31,7 +42,16 @@ public class FrankfurterProvider(IFrankfurterApi api) : ICurrencyProvider
         var startDate = request.StartDate.ToString("yyyy-MM-dd");
         var endDate = request.EndDate.ToString("yyyy-MM-dd");
 
-        var frankResp = await api.HistoricRates(request.Base, startDate, endDate);
+        var cacheKey = $"HistoricRates_{request.Base}_{startDate}_{endDate}_{request.Page}_{request.PageSize}";
+        if (!cache.TryGetValue(cacheKey, out FrankfurterHistoricResponse frankResp))
+        {
+            frankResp = await api.HistoricRates(request.Base, startDate, endDate);
+            var cacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+            };
+            cache.Set(cacheKey, frankResp, cacheEntryOptions);
+        }
 
         var pageRates = frankResp.Rates.Skip(request.PageSize * (request.Page - 1))
             .Take(request.PageSize).Select(rate => new HistoricRateDateSnapshot
