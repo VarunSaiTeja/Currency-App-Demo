@@ -12,7 +12,7 @@ public class FrankfurterProvider(IFrankfurterApi api) : ICurrencyProvider
 
     public async Task<ConversionResponse> Conversion(ConversionRequest request)
     {
-        var frankResp = await api.GetExchangeRatesAsync(request.Base, [.. request.Symbols]);
+        var frankResp = await api.GetExchangeRatesAsync(request.Base, request.Symbols);
         return new ConversionResponse
         {
             Base = frankResp.Base,

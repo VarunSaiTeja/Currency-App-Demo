@@ -6,8 +6,12 @@ public interface IFrankfurterApi
 {
     [Get("/latest")]
     Task<FrankfurterLatestResponse> GetExchangeRatesAsync(
+        [AliasAs("base")] string baseCurrency);
+
+    [Get("/latest")]
+    Task<FrankfurterLatestResponse> GetExchangeRatesAsync(
         [AliasAs("base")] string baseCurrency,
-        [Query(CollectionFormat.Csv)] params string[] symbols);
+        [Query(CollectionFormat.Csv)] List<string> symbols);
 
     [Get("/{startDate}..{endDate}")]
     Task<FrankfurterHistoricResponse> HistoricRates(

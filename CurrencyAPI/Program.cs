@@ -31,6 +31,8 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerVersioning();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddResponseCaching();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
@@ -63,6 +65,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseResponseCaching();
 app.MapControllers();
 
 app.Run();
