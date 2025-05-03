@@ -1,10 +1,12 @@
-﻿using CurrencyAPI.DTOs;
+﻿using Asp.Versioning;
+using CurrencyAPI.DTOs;
 using CurrencyAPI.Providers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CurrencyAPI.Controllers;
-[Route("api/[controller]/[action]")]
+namespace CurrencyAPI.Controllers.v1;
+[ApiVersion(1)]
 [ApiController]
+[Route("api/v{v:apiVersion}/[controller]/[action]")]
 public class CurrencyController(CurrencyProviderFactory factory) : ControllerBase
 {
     [HttpGet]
