@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Refit;
+using Serilog;
+using Serilog.Events;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -123,6 +125,24 @@ builder.Services.AddRateLimiter(options =>
 });
 #endregion
 
+#region Logging
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.Extensions.Http.DefaultHttpClientFactory", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .Enrich.WithClientIp()
+    .Enrich.WithCorrelationId(addValueIfHeaderAbsence: true)
+    .Enrich.WithClientId() // Custom Enricher
+    .WriteTo.Console()
+    .WriteTo.Seq(builder.Configuration.GetConnectionString("Seq"))
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
+#endregion
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
 builder.Services.AddOptions<JwtOptions>()

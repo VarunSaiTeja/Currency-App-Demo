@@ -13,7 +13,8 @@ public class TokenService(IOptionsSnapshot<JwtOptions> options)
     {
         var claims = new List<Claim>
         {
-            new("userId", user.Id.ToString())
+            new("userId", user.Id.ToString()),
+            new(ClaimTypes.Name, user.Id.ToString())
         };
 
         if (!string.IsNullOrEmpty(user.Name))
