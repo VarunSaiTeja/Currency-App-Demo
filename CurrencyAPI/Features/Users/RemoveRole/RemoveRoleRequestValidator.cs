@@ -1,5 +1,4 @@
-﻿using CurrencyAPI.Features.Users.RemoveRole;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace CurrencyAPI.Features.Users.RemoveRole;
 

@@ -186,10 +186,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseRateLimiter();
+app.UseResponseCaching();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseResponseCaching();
+app.UseRateLimiter();
 app.MapControllers();
 
 app.Run();

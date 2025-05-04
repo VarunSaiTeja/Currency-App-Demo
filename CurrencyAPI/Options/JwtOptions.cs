@@ -9,7 +9,7 @@ public class JwtOptions
 
     [Required(AllowEmptyStrings = false)]
     public string Secret { get; set; }
-    
+
     [Required]
     public int? AccessExpiryInMins { get; set; }
 

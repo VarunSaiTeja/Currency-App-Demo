@@ -1,9 +1,8 @@
 ﻿using CurrencyAPI.DAL.Entities;
-using CurrencyAPI.Features.Users.RemoveRole;
 using CurrencyAPI.Infra;
 using MediatR;
 
-namespace CurrencyAPI.Features.Users.AddRole;
+namespace CurrencyAPI.Features.Users.RemoveRole;
 
 public class RemoveRoleHandler(IRepository<User> userRepo) : IRequestHandler<RemoveRoleRequest, RemoveRoleResponse>
 {
