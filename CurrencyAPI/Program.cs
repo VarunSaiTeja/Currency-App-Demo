@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using CurrencyAPI;
 using CurrencyAPI.DAL;
 using CurrencyAPI.Extensions;
 using CurrencyAPI.Features.Currencies.Providers;
@@ -145,8 +146,10 @@ builder.Services.AddScoped<CurrencyProviderFactory>();
 
 builder.Services.AddScoped<TokenService>();
 
-var app = builder.Build();
+builder.Services.AddExceptionHandler<GlobalExHandler>();
 
+var app = builder.Build();
+app.UseExceptionHandler("/Error");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
