@@ -1,17 +1,29 @@
 using Asp.Versioning;
-using Asp.Versioning.Conventions;
+using CurrencyAPI.DAL;
 using CurrencyAPI.Extensions;
-using CurrencyAPI.Providers;
-using CurrencyAPI.Providers.Frankfurter;
+using CurrencyAPI.Features.Currencies.Providers;
+using CurrencyAPI.Features.Currencies.Providers.Frankfurter;
+using CurrencyAPI.Infra;
+using CurrencyAPI.Options;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Refit;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+     });
 
+#region API Versioning
 builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1);
@@ -28,14 +40,62 @@ builder.Services.AddApiVersioning(options =>
     options.GroupNameFormat = "'v'V";
     options.SubstituteApiVersionInUrl = true;
 });
+#endregion
 
-builder.Services.AddSwaggerGen();
+#region Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(o =>
+{
+    o.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Please enter into field the word 'Bearer' following by space and JWT",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
+    });
+    o.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 builder.Services.AddSwaggerVersioning();
+#endregion
+
+#region DAL
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlite(builder.Configuration.GetConnectionString("AppDB")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+#endregion
+
+#region Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]))
+        };
+    });
+
+builder.Services.AddAuthorization();
+#endregion
+
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
+builder.Services.AddOptions<JwtOptions>()
+    .BindConfiguration("Jwt")
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
+
+
 builder.Services
     .AddRefitClient<IFrankfurterApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev/v1"))
@@ -44,6 +104,8 @@ builder.Services
 
 builder.Services.AddKeyedScoped<ICurrencyProvider, FrankfurterProvider>(CurrencyProviderType.Frankfurter);
 builder.Services.AddScoped<CurrencyProviderFactory>();
+
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 
@@ -58,13 +120,14 @@ if (app.Environment.IsDevelopment())
         {
             options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
         }
+        options.EnablePersistAuthorization();
     });
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseResponseCaching();
 app.MapControllers();
 

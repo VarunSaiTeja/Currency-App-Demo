@@ -1,6 +1,7 @@
-﻿using CurrencyAPI.DTOs;
+﻿using CurrencyAPI.Features.Currencies.ExchangeRates;
+using CurrencyAPI.Features.Currencies.HistoricRates;
 
-namespace CurrencyAPI.Providers.Frankfurter;
+namespace CurrencyAPI.Features.Currencies.Providers.Frankfurter;
 public class FrankfurterLatestResponse
 {
     public decimal Amount { get; set; }

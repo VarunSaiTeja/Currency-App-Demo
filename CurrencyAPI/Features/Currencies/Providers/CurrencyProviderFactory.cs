@@ -1,4 +1,4 @@
-﻿namespace CurrencyAPI.Providers;
+﻿namespace CurrencyAPI.Features.Currencies.Providers;
 
 public enum CurrencyProviderType
 {

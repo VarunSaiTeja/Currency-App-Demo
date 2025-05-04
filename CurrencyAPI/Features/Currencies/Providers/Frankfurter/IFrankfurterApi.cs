@@ -1,6 +1,6 @@
 ﻿using Refit;
 
-namespace CurrencyAPI.Providers.Frankfurter;
+namespace CurrencyAPI.Features.Currencies.Providers.Frankfurter;
 
 public interface IFrankfurterApi
 {

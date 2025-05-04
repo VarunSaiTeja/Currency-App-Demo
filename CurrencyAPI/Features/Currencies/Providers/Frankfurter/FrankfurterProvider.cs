@@ -1,8 +1,10 @@
-﻿using CurrencyAPI.DTOs;
+﻿using CurrencyAPI.Features.Currencies.Conversion;
+using CurrencyAPI.Features.Currencies.ExchangeRates;
+using CurrencyAPI.Features.Currencies.HistoricRates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace CurrencyAPI.Providers.Frankfurter;
+namespace CurrencyAPI.Features.Currencies.Providers.Frankfurter;
 
 public class FrankfurterProvider(IFrankfurterApi api, IMemoryCache cache) : ICurrencyProvider
 {

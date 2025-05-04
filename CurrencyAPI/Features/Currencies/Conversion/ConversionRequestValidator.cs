@@ -1,30 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CurrencyAPI.DTOs;
-
-public class ConversionRequest
-{
-    public string Base { get; set; }
-    public decimal Amount { get; set; }
-
-    /// List of target currencies
-    /// Currencies TRY, PLN, THB, and MXN are not allowed
-    public List<string> Symbols { get; set; }
-}
-
-public class ConversionResponse
-{
-    public string Base { get; set; }
-    public decimal Amount { get; set; }
-    public List<ConversionRateInfo> ConversionRates { get; set; }
-}
-
-public class ConversionRateInfo
-{
-    public string Currency { get; set; }
-    public decimal ConversionRate { get; set; }
-    public decimal Amount { get; set; }
-}
+namespace CurrencyAPI.Features.Currencies.Conversion;
 
 public class ConversionRequestValidator : AbstractValidator<ConversionRequest>
 {

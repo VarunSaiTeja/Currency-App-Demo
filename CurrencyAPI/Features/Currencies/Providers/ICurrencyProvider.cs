@@ -1,7 +1,9 @@
-﻿using CurrencyAPI.DTOs;
+﻿using CurrencyAPI.Features.Currencies.Conversion;
+using CurrencyAPI.Features.Currencies.ExchangeRates;
+using CurrencyAPI.Features.Currencies.HistoricRates;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CurrencyAPI.Providers;
+namespace CurrencyAPI.Features.Currencies.Providers;
 
 public interface ICurrencyProvider
 {
