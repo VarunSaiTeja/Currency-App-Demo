@@ -9,6 +9,8 @@ public class AddRoleHandler(IRepository<User> userRepo) : IRequestHandler<AddRol
     public async Task<AddRoleResponse> Handle(AddRoleRequest request, CancellationToken cancellationToken)
     {
         var user = await userRepo.GetByIdAsync(request.UserId, cancellationToken) ?? throw new DomainException($"User with ID {request.UserId} not found.");
+        if (user.Roles.Contains(request.Role))
+            throw new DomainException($"User already has the role {request.Role}.");
         user.Roles = [.. user.Roles, request.Role];
 
         await userRepo.SaveChangesAsync(cancellationToken);

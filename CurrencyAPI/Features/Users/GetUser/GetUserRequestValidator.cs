@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace CurrencyAPI.Features.Users.GetRoles;
+namespace CurrencyAPI.Features.Users.GetUser;
 
-public class GetRolesRequestValidator : AbstractValidator<GetUserRequest>
+public class GetUserRequestValidator : AbstractValidator<GetUserRequest>
 {
-    public GetRolesRequestValidator()
+    public GetUserRequestValidator()
     {
         RuleFor(x => x.Email)
             .NotEmpty()

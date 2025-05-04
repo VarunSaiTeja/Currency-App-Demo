@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CurrencyAPI.Features.Users.GetRoles;
+namespace CurrencyAPI.Features.Users.GetUser;
 
 public class GetUserRequest : IRequest<GetUserResponse>
 {

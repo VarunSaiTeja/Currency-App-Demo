@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 using CurrencyAPI.Features.Users.AddRole;
-using CurrencyAPI.Features.Users.GetRoles;
+using CurrencyAPI.Features.Users.GetUser;
 using CurrencyAPI.Features.Users.RemoveRole;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

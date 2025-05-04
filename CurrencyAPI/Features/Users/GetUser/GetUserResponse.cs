@@ -1,6 +1,6 @@
 ﻿using CurrencyApp.Data.Entities;
 
-namespace CurrencyAPI.Features.Users.GetRoles;
+namespace CurrencyAPI.Features.Users.GetUser;
 
 public class GetUserResponse
 {

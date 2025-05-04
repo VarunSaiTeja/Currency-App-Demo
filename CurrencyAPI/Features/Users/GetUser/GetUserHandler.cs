@@ -4,7 +4,7 @@ using CurrencyApp.Data.Entities;
 using FluentValidation;
 using MediatR;
 
-namespace CurrencyAPI.Features.Users.GetRoles;
+namespace CurrencyAPI.Features.Users.GetUser;
 
 public class GetUserHandler(IRepository<User> userRepo) : IRequestHandler<GetUserRequest, GetUserResponse>
 {
