@@ -6,6 +6,7 @@ using CurrencyAPI.Features.Currencies.HistoricRates;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace CurrencyAPI.Controllers.v1;
 [ApiVersion(1)]
@@ -19,6 +20,7 @@ public class CurrencyController(IMediator mediator) : ControllerBase
     /// </summary>
     [HttpGet]
     [AllowAnonymous]
+    [EnableRateLimiting("ip")]
     [ResponseCache(Duration = 60 * 5, VaryByQueryKeys = new[] { "base" })]
     public async Task<ExchangeRatesResponse> ExchangeRates([FromQuery] ExchangeRatesRequest request)
     {
@@ -26,6 +28,7 @@ public class CurrencyController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
+    [EnableRateLimiting("user")]
     [Authorize(Roles = $"{nameof(UserRole.Customer)}")]
     public async Task<ConversionResponse> Conversion([FromQuery] ConversionRequest request)
     {
@@ -33,6 +36,7 @@ public class CurrencyController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
+    [EnableRateLimiting("user")]
     [Authorize(Roles = $"{nameof(UserRole.Analyst)}")]
     public async Task<HistoricRatesResponse> HistoricRates([FromQuery] HistoricRatesRequest request)
     {
