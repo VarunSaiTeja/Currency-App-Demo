@@ -1,4 +1,4 @@
-﻿namespace CurrencyAPI.DAL.Entities;
+﻿namespace CurrencyApp.Data.Entities;
 
 public class User
 {

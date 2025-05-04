@@ -1,5 +1,5 @@
-﻿using CurrencyAPI.DAL.Entities;
-using CurrencyAPI.Options;
+﻿using CurrencyAPI.Options;
+using CurrencyApp.Data.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

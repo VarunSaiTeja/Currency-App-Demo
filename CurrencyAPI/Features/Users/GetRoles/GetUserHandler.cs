@@ -1,6 +1,6 @@
 ﻿using Ardalis.Specification;
-using CurrencyAPI.DAL.Entities;
 using CurrencyAPI.Infra;
+using CurrencyApp.Data.Entities;
 using FluentValidation;
 using MediatR;
 

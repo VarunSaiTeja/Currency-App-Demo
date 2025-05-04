@@ -1,5 +1,5 @@
 using Ardalis.Specification;
-using CurrencyAPI.DAL;
+using CurrencyApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;

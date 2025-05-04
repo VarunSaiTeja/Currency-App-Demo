@@ -1,6 +1,6 @@
 using Ardalis.Specification;
-using CurrencyAPI.DAL.Entities;
 using CurrencyAPI.Infra;
+using CurrencyApp.Data.Entities;
 using MediatR;
 using System.Security.Cryptography;
 
@@ -19,7 +19,7 @@ public class LoginUserHandler(
             throw new DomainException("Invalid email or password");
 
         var refreshToken = RandomNumberGenerator.GetHexString(128).ToLower();
-        var refreshTokenEntity = new DAL.Entities.RefreshToken
+        var refreshTokenEntity = new RefreshToken
         {
             Token = refreshToken,
             UserId = user.Id,

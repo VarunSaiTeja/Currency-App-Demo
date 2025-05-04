@@ -1,11 +1,11 @@
 using Asp.Versioning;
 using CurrencyAPI;
-using CurrencyAPI.DAL;
 using CurrencyAPI.Extensions;
 using CurrencyAPI.Features.Currencies.Providers;
 using CurrencyAPI.Features.Currencies.Providers.Frankfurter;
 using CurrencyAPI.Infra;
 using CurrencyAPI.Options;
+using CurrencyApp.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -154,7 +154,7 @@ builder.Services
         metrics
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation();
-        
+
         metrics.AddOtlpExporter();
     })
     .WithTracing(tracing =>

@@ -1,8 +1,8 @@
-﻿using CurrencyAPI.DAL.Entities;
+﻿using CurrencyApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace CurrencyAPI.DAL;
+namespace CurrencyApp.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

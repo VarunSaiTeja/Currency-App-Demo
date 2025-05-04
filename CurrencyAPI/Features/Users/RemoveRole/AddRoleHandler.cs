@@ -1,5 +1,5 @@
-﻿using CurrencyAPI.DAL.Entities;
-using CurrencyAPI.Infra;
+﻿using CurrencyAPI.Infra;
+using CurrencyApp.Data.Entities;
 using MediatR;
 
 namespace CurrencyAPI.Features.Users.RemoveRole;

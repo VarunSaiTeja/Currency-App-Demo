@@ -1,6 +1,6 @@
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
-using CurrencyAPI.DAL;
+using CurrencyApp.Data;
 
 namespace CurrencyAPI.Infra;
 public interface IRepository<T> : IRepositoryBase<T> where T : class

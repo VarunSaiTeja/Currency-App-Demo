@@ -1,4 +1,4 @@
-﻿using CurrencyAPI.DAL.Entities;
+﻿using CurrencyApp.Data.Entities;
 using MediatR;
 
 namespace CurrencyAPI.Features.Users.RemoveRole;

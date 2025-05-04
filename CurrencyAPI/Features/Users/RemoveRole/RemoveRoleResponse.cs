@@ -1,4 +1,4 @@
-﻿using CurrencyAPI.DAL.Entities;
+﻿using CurrencyApp.Data.Entities;
 
 namespace CurrencyAPI.Features.Users.RemoveRole;
 
