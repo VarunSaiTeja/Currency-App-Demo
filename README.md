@@ -56,20 +56,20 @@
 ## Exchange Rates Flow
 
 ```
-[CurrencyController (ExchangeRates - endpoint)]
-    ↓
-[ExchangeRatesHandler (MediatR)]
-    ↓
+[CurrencyController]
+        ↓
+[ExchangeRatesHandler]
+        ↓
 [CurrencyProviderFactory]
-    ↓
+        ↓
 [FrankfurterProvider]
-    ↓
-[IFrankfurterApi (Refit)]
+        ↓
+[IFrankfurterApi]
 ```
 
 **Description:**
-1. **CurrencyController** receives the request for exchange rates.
-2. **ExchangeRatesHandler** processes the request and coordinates the application logic.
+1. **CurrencyController (ExchangeRates - endpoint)** receives the request for exchange rates.
+2. **ExchangeRatesHandler (MediatR)** processes the request and coordinates the application logic.
 3. **CurrencyProviderFactory** selects the appropriate provider (e.g., FrankfurterProvider).
 4. **FrankfurterProvider** implements the logic to interact with the external API and cache management.
 5. **FrankfurterApi (Refit)** is the Refit HTTP client interface for calling the Frankfurter exchange rate service.
