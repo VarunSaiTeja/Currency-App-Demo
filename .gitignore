@@ -361,6 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
 /CurrencyAPI/App.db
 /CurrencyAPI/App.db-shm
 /CurrencyAPI/App.db-wal
+
+/coverage-report/*
+/test-results/*

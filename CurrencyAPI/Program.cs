@@ -1,11 +1,13 @@
 using Asp.Versioning;
 using CurrencyAPI;
-using CurrencyAPI.Extensions;
-using CurrencyAPI.Features.Currencies.Providers;
-using CurrencyAPI.Features.Currencies.Providers.Frankfurter;
-using CurrencyAPI.Infra;
-using CurrencyAPI.Options;
+using CurrencyAPI.BuilderExtensions;
+using CurrencyApp.Application.Persistence;
+using CurrencyApp.Application.Providers;
 using CurrencyApp.Data;
+using CurrencyApp.Infra.Options;
+using CurrencyApp.Infra.Persistence;
+using CurrencyApp.Infra.Providers.Frankfurter;
+using CurrencyApp.Infra.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -216,7 +218,10 @@ app.UseHttpsRedirection();
 app.UseResponseCaching();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseRateLimiter();
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseRateLimiter();
+}
 app.MapControllers();
 
 app.Run();

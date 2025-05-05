@@ -1,4 +1,4 @@
-﻿using CurrencyAPI.Infra;
+﻿using CurrencyApp.Application;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Polly.CircuitBreaker;

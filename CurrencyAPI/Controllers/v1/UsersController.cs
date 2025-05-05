@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using CurrencyAPI.Features.Users.Login;
-using CurrencyAPI.Features.Users.RefreshAccessToken;
-using CurrencyAPI.Features.Users.Register;
+using CurrencyApp.Application.Features.Users.Login;
+using CurrencyApp.Application.Features.Users.RefreshAccessToken;
+using CurrencyApp.Application.Features.Users.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;

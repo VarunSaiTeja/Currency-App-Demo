@@ -7,9 +7,4 @@ public class RefreshToken
     public DateTime ExpiresOn { get; set; }
     public int UserId { get; set; }
     public User User { get; set; }
-
-    public static string GenerateToken()
-    {
-        return Guid.NewGuid().ToString();
-    }
 }

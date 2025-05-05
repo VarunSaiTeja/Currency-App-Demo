@@ -1,9 +1,11 @@
 ﻿using CurrencyApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CurrencyApp.Data;
 
+[ExcludeFromCodeCoverage]
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using CurrencyAPI.Features.Users.AddRole;
-using CurrencyAPI.Features.Users.GetUser;
-using CurrencyAPI.Features.Users.RemoveRole;
+using CurrencyApp.Application.Features.Users.AddRole;
+using CurrencyApp.Application.Features.Users.GetUser;
+using CurrencyApp.Application.Features.Users.RemoveRole;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

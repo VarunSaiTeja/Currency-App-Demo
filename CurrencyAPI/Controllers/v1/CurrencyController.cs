@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using CurrencyAPI.Features.Currencies.Conversion;
-using CurrencyAPI.Features.Currencies.ExchangeRates;
-using CurrencyAPI.Features.Currencies.HistoricRates;
+using CurrencyApp.Application.Features.Currencies.Conversion;
+using CurrencyApp.Application.Features.Currencies.ExchangeRates;
+using CurrencyApp.Application.Features.Currencies.HistoricRates;
 using CurrencyApp.Data.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
