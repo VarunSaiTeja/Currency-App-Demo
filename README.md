@@ -37,6 +37,8 @@
 - Dependency Injection
 - Options Pattern
 - Keyed Services
+- Output Caching
+- Rate Limiting
 
 ## Folder and Project Structure
 - **Currency.sln**: Solution file for the project.
@@ -50,3 +52,24 @@
 - **CurrencyApp.Application/**: Application logic, CQRS handlers, validators.
 - **CurrencyApp.Data/**: Data models, repositories, specifications.
 - **CurrencyApp.Infra/**: Infrastructure services, external API providers.
+
+## Exchange Rates Flow
+
+```
+[Controller]
+    ↓
+[Handler]
+    ↓
+[CurrencyProviderFactory]
+    ↓
+[FrankfurterProvider]
+    ↓
+[FrankfurterApi (Refit)]
+```
+
+**Description:**
+1. **Controller** receives the request for exchange rates.
+2. **Handler** processes the request and coordinates the application logic.
+3. **CurrencyProviderFactory** selects the appropriate provider (e.g., FrankfurterProvider).
+4. **FrankfurterProvider** implements the logic to interact with the external API.
+5. **FrankfurterApi (Refit)** is the Refit HTTP client interface for calling the Frankfurter exchange rate service.
