@@ -56,15 +56,15 @@
 ## Exchange Rates Flow
 
 ```
-[Controller]
+[CurrencyController]
     ↓
-[Handler]
+[ExchangeRatesHandler (MediatR)]
     ↓
 [CurrencyProviderFactory]
     ↓
 [FrankfurterProvider]
     ↓
-[FrankfurterApi (Refit)]
+[IFrankfurterApi (Refit)]
 ```
 
 **Description:**
