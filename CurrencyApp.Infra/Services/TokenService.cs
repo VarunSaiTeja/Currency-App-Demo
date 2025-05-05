@@ -1,4 +1,5 @@
-﻿using CurrencyApp.Data.Entities;
+﻿using CurrencyApp.Application.Services;
+using CurrencyApp.Data.Entities;
 using CurrencyApp.Infra.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 namespace CurrencyApp.Infra.Services;
 
-public class TokenService(IOptionsSnapshot<JwtOptions> options)
+public class TokenService(IOptionsSnapshot<JwtOptions> options) : ITokenService
 {
     public virtual string GenerateAccessToken(User user)
     {

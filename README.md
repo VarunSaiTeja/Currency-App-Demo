@@ -1,4 +1,4 @@
-# Currency
+# Currency Apps
 
 ## Setup Instructions
 
@@ -14,6 +14,19 @@
    ```sh
    docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
    ```
+
+## Environments
+Development, Test, Production
+
+**Note:** Use the **Development** environment to test locally.
+
+## Test Accounts
+
+| User             | Password    | Roles                    |
+|------------------|-------------|--------------------------|
+| admin@app.com    | Admin@123   | Admin, Customer, Analyst |
+| varun@app.com    | Varun@123   | Customer                 |
+| teja@app.com     | Teja@123    | Customer, Analyst        |
 
 ## Architecture
 - Vertical slices

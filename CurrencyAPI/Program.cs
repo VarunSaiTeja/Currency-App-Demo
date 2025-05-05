@@ -3,6 +3,7 @@ using CurrencyAPI;
 using CurrencyAPI.BuilderExtensions;
 using CurrencyApp.Application.Persistence;
 using CurrencyApp.Application.Providers;
+using CurrencyApp.Application.Services;
 using CurrencyApp.Data;
 using CurrencyApp.Infra.Options;
 using CurrencyApp.Infra.Persistence;
@@ -131,7 +132,7 @@ builder.Services.AddRateLimiter(options =>
 #endregion
 
 #region Logging
-Log.Logger = new LoggerConfiguration()
+var loggerConfig = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
     .MinimumLevel.Override("Microsoft.Extensions.Http.DefaultHttpClientFactory", LogEventLevel.Information)
@@ -139,9 +140,14 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithClientIp()
     .Enrich.WithCorrelationId(addValueIfHeaderAbsence: true)
     .Enrich.WithClientId() // Custom Enricher
-    .WriteTo.Console()
-    .WriteTo.Seq(builder.Configuration.GetConnectionString("Seq"))
-    .CreateLogger();
+    .WriteTo.Seq(builder.Configuration.GetConnectionString("Seq"));
+
+if (builder.Environment.IsDevelopment())
+{
+    loggerConfig.WriteTo.Console();
+}
+
+Log.Logger = loggerConfig.CreateLogger();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();
@@ -179,7 +185,7 @@ builder.Services.AddOptions<JwtOptions>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-builder.Services.AddMediatR(c => c.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<CurrencyApp.Application.AssemblyInfo>());
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 
@@ -193,14 +199,14 @@ builder.Services
 builder.Services.AddKeyedScoped<ICurrencyProvider, FrankfurterProvider>(CurrencyProviderType.Frankfurter);
 builder.Services.AddScoped<CurrencyProviderFactory>();
 
-builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddExceptionHandler<GlobalExHandler>();
 
 var app = builder.Build();
 app.UseExceptionHandler("/Error");
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
 {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
