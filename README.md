@@ -37,3 +37,16 @@
 - Dependency Injection
 - Options Pattern
 - Keyed Services
+
+## Folder and Project Structure
+- **Currency.sln**: Solution file for the project.
+- **README.md**: Project documentation.
+- **coverlet.runsettings**: Code coverage configuration.
+- **test-report-generator.bat**: Batch script for generating test reports.
+- **coverage-report/**: Generated code coverage reports.
+- **test-results/**: Test result outputs.
+- **CurrencyAPI/**: Main API project (controllers, startup, etc.).
+- **CurrencyAPI.Tests/**: Unit and integration tests.
+- **CurrencyApp.Application/**: Application logic, CQRS handlers, validators.
+- **CurrencyApp.Data/**: Data models, repositories, specifications.
+- **CurrencyApp.Infra/**: Infrastructure services, external API providers.
