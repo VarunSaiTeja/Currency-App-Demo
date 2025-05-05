@@ -15,14 +15,6 @@
    docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
    ```
 
-## Assumptions Made
-- Admin can manage roles of other users
-- In future, can switch to any currency exchange rate provider
-
-## Possible Future Enhancements
-- Distributed caching
-- Reverse proxy
-
 ## Architecture
 - Vertical slices
 
@@ -82,3 +74,12 @@
 4. **IUnitOfWork** manages transactional operations and coordinates repository actions.
 5. **IRepository** is used to fetch user data from the data store.
 6. **ITokenService** generates authentication tokens for the user upon successful login.
+
+## Assumptions Made
+- Admin can manage roles of other users
+- In future, can switch to any currency exchange rate provider
+- Other currency providers supports pagination for historical data, so added caching at provider level for Frankfurter provider
+
+## Possible Future Enhancements
+- Distributed caching
+- Reverse proxy
