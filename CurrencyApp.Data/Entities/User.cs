@@ -1,4 +1,6 @@
-﻿namespace CurrencyApp.Data.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace CurrencyApp.Data.Entities;
 
 public class User
 {
@@ -26,6 +28,7 @@ public class User
     }
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum UserRole
 {
     Admin,

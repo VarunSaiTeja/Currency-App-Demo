@@ -186,7 +186,7 @@ builder.Services.AddOptions<JwtOptions>()
     .ValidateOnStart();
 
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<CurrencyApp.Application.AssemblyInfo>());
-builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(CurrencyApp.Application.AssemblyInfo).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 
 

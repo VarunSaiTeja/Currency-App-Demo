@@ -13,7 +13,7 @@ public class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
             .WithMessage("Name must be at least 3 characters long.");
 
         RuleFor(x => x.Email)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Email is required.")
             .EmailAddress()
