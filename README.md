@@ -56,7 +56,7 @@
 ## Exchange Rates Flow
 
 ```
-[CurrencyController]
+[CurrencyController (ExchangeRates - endpoint)]
     ↓
 [ExchangeRatesHandler (MediatR)]
     ↓
@@ -73,3 +73,12 @@
 3. **CurrencyProviderFactory** selects the appropriate provider (e.g., FrankfurterProvider).
 4. **FrankfurterProvider** implements the logic to interact with the external API and cache management.
 5. **FrankfurterApi (Refit)** is the Refit HTTP client interface for calling the Frankfurter exchange rate service.
+
+## Login Flow
+**Description:**
+1. **UsersController->Login** receives the login request from the client.
+2. **LoginRequestValidator** validates the login request data.
+3. **LoginRequestHandler** processes the login logic, validating credentials.
+4. **IUnitOfWork** manages transactional operations and coordinates repository actions.
+5. **IRepository** is used to fetch user data from the data store.
+6. **ITokenService** generates authentication tokens for the user upon successful login.
