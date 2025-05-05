@@ -1,4 +1,4 @@
-# Currency Apps
+# Currency App
 
 ## Setup Instructions
 
@@ -81,7 +81,7 @@ Development, Test, Production
 
 ## Login Flow
 **Description:**
-1. **UsersController->Login** receives the login request from the client.
+1. **UsersController -> Login** receives the login request from the client.
 2. **LoginRequestValidator** validates the login request data.
 3. **LoginRequestHandler** processes the login logic, validating credentials.
 4. **IUnitOfWork** manages transactional operations and coordinates repository actions.
@@ -96,3 +96,6 @@ Development, Test, Production
 ## Possible Future Enhancements
 - Distributed caching
 - Reverse proxy
+- Two Factor Authentication (2FA)
+- Audit logging
+- Health checks
