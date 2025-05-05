@@ -68,8 +68,8 @@
 ```
 
 **Description:**
-1. **Controller** receives the request for exchange rates.
-2. **Handler** processes the request and coordinates the application logic.
+1. **CurrencyController** receives the request for exchange rates.
+2. **ExchangeRatesHandler** processes the request and coordinates the application logic.
 3. **CurrencyProviderFactory** selects the appropriate provider (e.g., FrankfurterProvider).
-4. **FrankfurterProvider** implements the logic to interact with the external API.
+4. **FrankfurterProvider** implements the logic to interact with the external API and cache management.
 5. **FrankfurterApi (Refit)** is the Refit HTTP client interface for calling the Frankfurter exchange rate service.
