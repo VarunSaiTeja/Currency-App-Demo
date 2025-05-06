@@ -124,7 +124,7 @@ builder.Services.AddRateLimiter(options =>
             partitionKey: httpContext.User?.Identity?.Name ?? "unknown",
             factory: f => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 10,
+                PermitLimit = 20,
                 Window = TimeSpan.FromMinutes(1)
             })
         );

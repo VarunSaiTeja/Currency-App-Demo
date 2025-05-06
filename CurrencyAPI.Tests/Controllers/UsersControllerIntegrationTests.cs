@@ -1,19 +1,18 @@
-using System.Net;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+using CurrencyAPI.Tests.Setup;
 using CurrencyApp.Application.Features.Users.Login;
 using CurrencyApp.Application.Features.Users.RefreshAccessToken;
 using CurrencyApp.Application.Features.Users.Register;
-using Xunit;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace CurrencyAPI.Tests.Controllers;
 
-public class UsersControllerIntegrationTests : IClassFixture<MockedWebApplicationFactory>
+public class UsersControllerIntegrationTests : IClassFixture<DefaultWebApplicationFactory>
 {
-    private readonly MockedWebApplicationFactory _factory;
+    private readonly DefaultWebApplicationFactory _factory;
     private readonly HttpClient _client;
 
-    public UsersControllerIntegrationTests(MockedWebApplicationFactory factory)
+    public UsersControllerIntegrationTests(DefaultWebApplicationFactory factory)
     {
         _factory = factory;
         _client = factory.CreateClient();

@@ -99,3 +99,20 @@ Development, Test, Production
 - Two Factor Authentication (2FA)
 - Audit logging
 - Health checks
+
+## Code Coverage
+
+- Current line coverage: **97%** (261/267 coverable lines, 97.7%)
+- Code coverage reports are generated in the `coverage-report/` folder.
+- **Note:** EF Core migration files and `Program.cs` were excluded from code coverage analysis to focus on business and application logic.
+
+### Generating the Coverage Report
+
+To generate and view the latest code coverage report:
+
+1. Run the `test-report-generator.bat` script (double-click it or run from the command line)
+2. This will:
+   - Delete old test results and coverage reports
+   - Run all tests and collect coverage data
+   - Generate an HTML report in the `coverage-report/` folder
+   - Automatically open the report in your default browser

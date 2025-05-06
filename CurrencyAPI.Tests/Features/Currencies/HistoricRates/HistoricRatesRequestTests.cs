@@ -1,4 +1,3 @@
-using System;
 using CurrencyApp.Application.Features.Currencies.HistoricRates;
 
 namespace CurrencyAPI.Tests.Features.Currencies.HistoricRates;

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace CurrencyAPI.Tests.Controllers;
+namespace CurrencyAPI.Tests.Setup;
 public class TestAuthHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
@@ -15,7 +15,7 @@ public class TestAuthHandler(
     {
         if (!Context.Request.Headers.TryGetValue("Test-Role", out StringValues roles))
             return Task.FromResult(AuthenticateResult.NoResult());
-        
+
         var claims = new List<Claim>
             {
                 new(ClaimTypes.Name, "1"),

@@ -7,7 +7,7 @@ public class RemoveRoleRequestValidator : AbstractValidator<RemoveRoleRequest>
     public RemoveRoleRequestValidator()
     {
         RuleFor(x => x.UserId)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("UserId is required.")
             .GreaterThan(0)

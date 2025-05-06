@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CurrencyApp.Application.Providers;
 
@@ -9,7 +8,6 @@ public enum CurrencyProviderType
     OpenExchangeRates
 }
 
-[ExcludeFromCodeCoverage]
 public class CurrencyProviderFactory(IServiceProvider services)
 {
     public virtual ICurrencyProvider Get(CurrencyProviderType providerType = CurrencyProviderType.Frankfurter)

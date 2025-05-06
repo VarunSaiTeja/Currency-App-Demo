@@ -1,19 +1,24 @@
-﻿using CurrencyApp.Data;
+using CurrencyApp.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
-namespace CurrencyAPI.Tests.Controllers;
-public class MockedWebApplicationFactory : WebApplicationFactory<Program>
+namespace CurrencyAPI.Tests.Setup;
+
+public abstract class BaseWebApplicationFactory : WebApplicationFactory<Program>
 {
+    private readonly string _environment;
+    protected BaseWebApplicationFactory(string environment)
+    {
+        _environment = environment;
+    }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("Testing");
-        
+        builder.UseEnvironment(_environment);
         builder.ConfigureServices(services =>
         {
             // Replace DB with in-memory

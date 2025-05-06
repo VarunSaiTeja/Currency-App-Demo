@@ -17,7 +17,7 @@ public class ConversionRequestValidator : AbstractValidator<ConversionRequest>
             .WithMessage("Amount must be greater than zero.");
 
         RuleFor(x => x.Symbols)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotNull()
             .NotEmpty()
             .WithMessage("At least one target currency is required.")

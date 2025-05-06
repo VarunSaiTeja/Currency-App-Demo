@@ -7,7 +7,7 @@ public class LoginRequestValidator : AbstractValidator<LoginUserRequest>
     public LoginRequestValidator()
     {
         RuleFor(x => x.Password)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Password is required.")
             .MinimumLength(6)
@@ -22,7 +22,7 @@ public class LoginRequestValidator : AbstractValidator<LoginUserRequest>
             .WithMessage("Password must contain at least one special character.");
 
         RuleFor(x => x.Email)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Email is required.")
             .EmailAddress()

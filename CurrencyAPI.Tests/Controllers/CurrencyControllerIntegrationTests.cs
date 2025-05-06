@@ -1,20 +1,18 @@
-using System.Net;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+using CurrencyAPI.Tests.Setup;
 using CurrencyApp.Application.Features.Currencies.Conversion;
 using CurrencyApp.Application.Features.Currencies.ExchangeRates;
 using CurrencyApp.Application.Features.Currencies.HistoricRates;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace CurrencyAPI.Tests.Controllers;
 
-public class CurrencyControllerIntegrationTests : IClassFixture<MockedWebApplicationFactory>
+public class CurrencyControllerIntegrationTests : IClassFixture<DefaultWebApplicationFactory>
 {
-    private readonly MockedWebApplicationFactory _factory;
+    private readonly DefaultWebApplicationFactory _factory;
     private readonly HttpClient _client;
 
-    public CurrencyControllerIntegrationTests(MockedWebApplicationFactory factory)
+    public CurrencyControllerIntegrationTests(DefaultWebApplicationFactory factory)
     {
         _factory = factory;
         _client = factory.CreateClient();

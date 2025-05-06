@@ -7,7 +7,7 @@ public class AddRoleRequestValidator : AbstractValidator<AddRoleRequest>
     public AddRoleRequestValidator()
     {
         RuleFor(x => x.UserId)
-            .Cascade(CascadeMode.StopOnFirstFailure)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("UserId is required.")
             .GreaterThan(0)

@@ -3,7 +3,6 @@ using CurrencyApp.Application.Features.Users.Login;
 using CurrencyApp.Application.Persistence;
 using CurrencyApp.Application.Services;
 using CurrencyApp.Data.Entities;
-using CurrencyApp.Infra.Services;
 using Moq;
 namespace CurrencyAPI.Tests.Features.Users.Login;
 public class LoginUserHandlerTest

@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using CurrencyApp.Data.Entities;
 using CurrencyApp.Infra.Options;
 using CurrencyApp.Infra.Services;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Moq;
-using Xunit;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace CurrencyAPI.Tests.Services
 {
@@ -29,16 +23,16 @@ namespace CurrencyAPI.Tests.Services
             // Arrange
             var options = new JwtOptions
             {
-            Issuer = "TestIssuer",
-            Secret = "SAMPLEw8Hay9CrKPe2CNZppxCQvGiPtwP1tv10Zbe2g6HY91YD1LgqpDTaKq63R1Jn57L7wUWeB6fqndmj879KpLCbrT1QMCGUiZTux9Erz6qYcX1vmFKULbdH0TteSa",
-            AccessExpiryInMins = 60,
-            RefreshExpiryInDays = 7
+                Issuer = "TestIssuer",
+                Secret = "SAMPLEw8Hay9CrKPe2CNZppxCQvGiPtwP1tv10Zbe2g6HY91YD1LgqpDTaKq63R1Jn57L7wUWeB6fqndmj879KpLCbrT1QMCGUiZTux9Erz6qYcX1vmFKULbdH0TteSa",
+                AccessExpiryInMins = 60,
+                RefreshExpiryInDays = 7
             };
             var user = new User
             {
-            Id = 42,
-            Name = "Test User",
-            Roles = new List<UserRole> { UserRole.Admin, UserRole.Customer }
+                Id = 42,
+                Name = "Test User",
+                Roles = new List<UserRole> { UserRole.Admin, UserRole.Customer }
             };
             var service = CreateService(options);
 

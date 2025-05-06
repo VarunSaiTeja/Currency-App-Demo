@@ -1,19 +1,18 @@
-using System.Net;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+using CurrencyAPI.Tests.Setup;
 using CurrencyApp.Application.Features.Users.AddRole;
 using CurrencyApp.Application.Features.Users.GetUser;
 using CurrencyApp.Application.Features.Users.RemoveRole;
-using Xunit;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace CurrencyAPI.Tests.Controllers;
 
-public class AdminControllerIntegrationTests : IClassFixture<MockedWebApplicationFactory>
+public class AdminControllerIntegrationTests : IClassFixture<DefaultWebApplicationFactory>
 {
-    private readonly MockedWebApplicationFactory _factory;
+    private readonly DefaultWebApplicationFactory _factory;
     private readonly HttpClient _client;
 
-    public AdminControllerIntegrationTests(MockedWebApplicationFactory factory)
+    public AdminControllerIntegrationTests(DefaultWebApplicationFactory factory)
     {
         _factory = factory;
         _client = factory.CreateClient();

@@ -4,11 +4,9 @@ using CurrencyApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CurrencyApp.Infra.Persistence;
 
-[ExcludeFromCodeCoverage]
 public class UnitOfWork(AppDbContext dbContext) : IUnitOfWork, IDisposable
 {
     public IRepositoryBase<T> Repository<T>() where T : class => new Repository<T>(dbContext);

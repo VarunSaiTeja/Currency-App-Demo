@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using CurrencyApp.Application.Features.Currencies.HistoricRates;
-using Xunit;
 
 namespace CurrencyAPI.Tests.Features.Currencies.HistoricRates
 {
